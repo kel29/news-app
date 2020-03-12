@@ -13,7 +13,7 @@ const ChannelHeader = (props) => {
     <>
       <ImageBackground
         source={imageSource}
-        style={{width: Layout.window.width, height: 100}}
+        style={styles.image}
       >
         <View style={styles.contentContainer}>
           <Text style={styles.headerText}>{header}</Text>
@@ -35,5 +35,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 35,
     fontWeight: '800',
+  },
+  image: {
+    width: Layout.window.width,
+    height: 100
   }
 });

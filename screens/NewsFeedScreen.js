@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import * as WebBrowser from 'expo-web-browser';
 
 import { API } from '../constants/api'
-import ChannelHeader from '../components/ChannelHeader'
-
-const initialChannels = [{
-  header: '',
-  id: 'initialChannel',
-  tease: ''
-}]
+import NewsSection from '../components/NewsSection'
 
 const NewsFeedScreen = () => {
-  const [newsData, setNewsData] = useState({})
-  const [channels, setChannels] = useState(initialChannels)
+  const [newsData, setNewsData] = useState([])
 
   useEffect(() => {
     fetchNews()
@@ -23,21 +15,15 @@ const NewsFeedScreen = () => {
   const fetchNews = () => {
     fetch(API)
     .then(res => res.json())
-    .then(data => {
-      setChannels(data.data[data.data.length - 1].items)
-    })
+    .then(data => setNewsData(data.data))
     .catch(e => console.warn(e))
   }
 
   const displayNews = () => {
-    return channels.map(channel => {
-      return (
-        <ChannelHeader
-          header={channel.header}
-          key={channel.id}
-          backgroundImage={channel.tease}
-        />
-      )
+    return newsData.map(newsItem => {
+      if (newsItem.type === "Section" && newsItem.showMore) {
+        return <NewsSection data={newsItem} key={newsItem.id} />
+      }
     })
   }
 

@@ -1,0 +1,1 @@
+This is a React Native mobile application for viewing the news.

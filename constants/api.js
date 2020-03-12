@@ -1,0 +1,1 @@
+export const API = "https://s3.amazonaws.com/shrekendpoint/news.json"

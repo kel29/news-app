@@ -8,17 +8,19 @@ import {
 } from 'react-native'
 import * as WebBrowser from 'expo-web-browser';
 
-const NewsArticle = (props) => {
-  const { headline, tease, summary, url } = props.article
+const NewsItem = (props) => {
+  const { headline, tease, summary, url } = props.item
+  const { type } = props
 
-  const openArticle = () => {
+  const openItem = () => {
     WebBrowser.openBrowserAsync(url)
   }
 
   return (
     <>
       <View style={styles.contentContainer}>
-        <TouchableOpacity onPress={openArticle}>
+        {type !== 'article' && <Image source={{uri: tease}} style={styles.largeImage} />}
+        <TouchableOpacity onPress={openItem}>
           <Text style={styles.headline}>
             {headline}
           </Text>
@@ -26,13 +28,12 @@ const NewsArticle = (props) => {
         <Text>
           {summary}
         </Text>
-        <Image source={{uri: tease}} style={styles.image} />
       </View>
     </>
   )
 }
 
-export default NewsArticle
+export default NewsItem
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -43,6 +44,11 @@ const styles = StyleSheet.create({
   headline: {
     fontSize: 20,
     fontWeight: '600'
+  },
+  largeImage: {
+    flex: 1,
+    height: 200,
+    width: '100%'
   },
   image: {
     height: 60,

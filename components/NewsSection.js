@@ -2,15 +2,13 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 
 import ChannelHeader from '../components/ChannelHeader'
-import NewsArticle from '../components/NewsArticle'
+import NewsItem from './NewsItem'
 
 const NewsSection = (props) => {
   const { header, tease, id, items } = props.data
 
   const parseItems = () => {
-    return items.map(item => {
-      if (item.type === 'article') return (<NewsArticle article={item} id={item.id} />)
-    })
+    return items.map(item => <NewsItem item={item} key={item.id} type={item.type} />)
   }
 
   return (

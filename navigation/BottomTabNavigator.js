@@ -2,15 +2,31 @@ import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import NewsFeedScreen from '../screens/NewsFeedScreen';
+import colors from '../constants/Colors'
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'NewsFeed'
 
 export default function BottomTabNavigator({ navigation, route }) {
-  navigation.setOptions({ headerTitle: getHeaderTitle(route) });
+  navigation.setOptions({
+    headerTitle: getHeaderTitle(route),
+    headerStyle: {
+      backgroundColor: colors.primary,
+    },
+    headerTitleStyle: {
+      color: colors.text,
+      fontFamily: 'oswald'
+    }
+  });
 
   return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+    <BottomTab.Navigator
+      initialRouteName={INITIAL_ROUTE_NAME}
+      tabBarOptions={{
+        style: {backgroundColor: colors.primary},
+        labelStyle: {color: colors.text, fontFamily: 'oswald'}
+      }}
+    >
       <BottomTab.Screen
         name="NewsFeed"
         component={NewsFeedScreen}
@@ -28,6 +44,6 @@ function getHeaderTitle(route) {
 
   switch (routeName) {
     case 'NewsFeed':
-      return 'News'
+      return 'NEWS'
   }
 }

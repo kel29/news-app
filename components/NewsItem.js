@@ -19,7 +19,11 @@ const NewsItem = (props) => {
   return (
     <>
       <View style={styles.contentContainer}>
-        {type !== 'article' && <Image source={{uri: tease}} style={styles.largeImage} />}
+        {type !== 'article' &&
+          <TouchableOpacity onPress={openItem}>
+            <Image source={{uri: tease}} style={styles.largeImage} />
+          </TouchableOpacity>
+        }
         <TouchableOpacity onPress={openItem}>
           <Text style={styles.headline}>
             {headline}
@@ -43,12 +47,14 @@ const styles = StyleSheet.create({
   },
   headline: {
     fontSize: 20,
-    fontWeight: '600'
+    fontFamily: 'oswald-bold',
+    lineHeight: 22
   },
   largeImage: {
     flex: 1,
     height: 200,
-    width: '100%'
+    width: '100%',
+    marginBottom: 10
   },
   image: {
     height: 60,

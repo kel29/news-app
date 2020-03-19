@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
     fontSize: 35,
-    fontWeight: '800',
+    fontFamily: 'oswald-bold'
   },
   image: {
     width: Layout.window.width,
